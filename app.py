@@ -31,13 +31,17 @@ class MHZALYCoreEngine:
             return f"[Real Execution Matrix]: Processed query successfully -> '{query}'. Target Language: {language}. System integrity: 100% operational."
 
     def _generate_real_code(self, task: str, lang: str) -> str:
-        templates = {
-            "Python": f"# Auto-Generated Python Production Script\n# Task: {task}\nimport os, sys, socket\n\ndef execute_payload():\n    print('[*] Initializing secure execution...')\n    target_task = \"{task}\"\n    return True\n\nif __name__ == '__main__':\n    execute_payload()",
-            "JavaScript": f"// Auto-Generated JavaScript Node Module\n// Task: {task}\nconst fs = require('fs');\n\nfunction executeTask() {\n    console.log('[*] Running Node execution for: {task}');\n}\n\nexecuteTask();",
-            "C++": f"// Auto-Generated C++ Core Binary\n// Task: {task}\n#include <iostream>\n#include <string>\n\nusing namespace std;\n\nint main() {\n    cout << \"[*] Executing C++ module for: {task}\" << endl;\n    return 0;\n}",
-            "Bash": f"#!/bin/bash\n# Auto-Generated Bash Automation Script\n# Task: {task}\necho '[*] Starting shell execution...'\necho 'Target: {task}'"
-        }
-        code = templates.get(lang, f"# Generic template for {lang}\n# Task: {task}")
+        if lang == "Python":
+            code = f"# Auto-Generated Python Production Script\n# Task: {task}\nimport os, sys, socket\n\ndef execute_payload():\n    print('[*] Initializing secure execution...')\n    target_task = \"{task}\"\n    return True\n\nif __name__ == '__main__':\n    execute_payload()"
+        elif lang == "JavaScript":
+            code = f"// Auto-Generated JavaScript Node Module\n// Task: {task}\nconst fs = require('fs');\n\nfunction executeTask() {\n    console.log('[*] Running Node execution for: {task}');\n}\n\nexecuteTask();"
+        elif lang == "C++":
+            code = f"// Auto-Generated C++ Core Binary\n// Task: {task}\n#include <iostream>\n#include <string>\n\nusing namespace std;\n\nint main() {\n    cout << \"[*] Executing C++ module for: {task}\" << endl;\n    return 0;\n}"
+        elif lang == "Bash":
+            code = f"#!/bin/bash\n# Auto-Generated Bash Automation Script\n# Task: {task}\necho '[*] Starting shell execution...'\necho 'Target: {task}'"
+        else:
+            code = f"# Generic template for {lang}\n# Task: {task}"
+            
         return f"💻 **Real Compiled Code Output ({lang}):**\n```{lang.lower()}\n{code}\n```"
 
     def _parse_security_logs(self, log_data: str) -> str:
@@ -82,7 +86,7 @@ with st.sidebar:
 
 # Main UI Interface
 st.title("⚡ MHZALY Autonomous Heavy-Duty Engine")
-st.markdown("Real programmatic logic engine—no module import errors, direct single-file deployment.")
+st.markdown("Real programmatic logic engine—clean syntax structure ready for production.")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []

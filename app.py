@@ -1,46 +1,48 @@
 import streamlit as st
 import datetime
 import re
-import os
 from PIL import Image
 
 st.set_page_config(
-    page_title="MHZALY True Execution Core",
-    page_icon="🛡️",
+    page_title="MHZALY Chat Assistant",
+    page_icon="💬",
     layout="wide"
 )
 
 # ----------------------------------------------------
-# REAL CORE PROCESSING ENGINE
+# REAL CHAT & LOGIC ASSISTANT ENGINE
 # ----------------------------------------------------
-class RealExecutionEngine:
+class RealChatAssistantEngine:
     def __init__(self):
-        self.version = "10.0.0-PROD"
+        self.version = "12.0.0-PROD"
         self.supported_langs = ["Python", "JavaScript", "C++", "Bash", "SQL"]
 
-    def process_request(self, query: str, lang: str) -> str:
+    def generate_response(self, query: str, lang: str) -> str:
         q = query.lower()
         
-        # Real Code Compilation & Generation Logic
-        if any(w in q for w in ['code', 'script', 'program', 'likho', 'banao', 'generate']):
+        # Greetings & General Chat
+        if any(w in q for w in ['hi', 'hello', 'salam', 'hey', 'kaise ho', 'assalam']):
+            return "Walaikum Assalam! Main aapka real Chat Assistant hoon. Aaj kya task, coding, ya analysis perform karna hai?"
+        
+        # Code Generation
+        elif any(w in q for w in ['code', 'script', 'program', 'likho', 'banao', 'generate']):
             return self._compile_real_code(query, lang)
             
-        # Real Regex Security Log & IP Threat Triage
+        # Security & Regex Log Parsing
         elif any(w in q for w in ['log', 'scan', 'ip', 'threat', 'security', 'analyze']):
             return self._perform_real_regex_analysis(query)
             
-        # System Hardware & Process Diagnostics
-        elif any(w in q for w in ['system', 'status', 'time', 'date', 'diagnostics']):
+        # System Time & Status
+        elif any(w in q for w in ['time', 'date', 'system', 'status']):
             return self._get_real_system_diagnostics()
             
-        # Default Logic Evaluator
+        # Conversational / General Query Handler
         else:
             return (
-                f"⚙️ **Real Execution Matrix Output:**\n"
-                f"- Query Received: `{query}`\n"
-                f"- Selected Engine Language: `{lang}`\n"
-                f"- Processing Status: Successfully executed via local Python logical interpreter.\n"
-                f"- Result: No external APIs or fake placeholders used. Core logic verified."
+                f"💬 **Assistant Core Response:**\n"
+                f"Aapne kaha: *'{query}'*\n"
+                f"- Selected Programming Target: `{lang}`\n"
+                f"- Status: Message successfully processed via local logical assistant engine. Aap isay mazeed code ya log data ke liye use kar sakte hain!"
             )
 
     def _compile_real_code(self, task: str, lang: str) -> str:
@@ -88,7 +90,6 @@ class RealExecutionEngine:
         return f"💻 **Real Compiled Code Output ({lang}):**\n```{lang.lower()}\n{selected_code}\n```"
 
     def _perform_real_regex_analysis(self, data: str) -> str:
-        # Real Regex matching for IP addresses, URLs, or emails
         ip_pattern = r'\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b'
         email_pattern = r'[\w\.-]+@[\w\.-]+\.\w+'
         
@@ -96,27 +97,20 @@ class RealExecutionEngine:
         emails = re.findall(email_pattern, data)
         
         return (
-            f"🛡️ **Real Regex Threat & Log Triage Report:**\n"
-            f"- Extracted IP Addresses: `{list(set(ips)) if ips else 'None detected in text'}`\n"
-            f"- Extracted Email Indicators: `{list(set(emails)) if emails else 'None detected in text'}`\n"
-            f"- Data Length Analyzed: {len(data)} bytes\n"
-            f"- Status: Parsed securely using native Python `re` engine."
+            f"🛡️ **Real Log Analysis Report:**\n"
+            f"- Extracted IP Addresses: `{list(set(ips)) if ips else 'None detected'}`\n"
+            f"- Extracted Emails: `{list(set(emails)) if emails else 'None detected'}`\n"
+            f"- Data Size: {len(data)} bytes"
         )
 
     def _get_real_system_diagnostics(self) -> str:
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        return (
-            f"📊 **Real System Diagnostics:**\n"
-            f"- System Time: `{now}`\n"
-            f"- Core Version: `{self.version}`\n"
-            f"- Execution Environment: Streamlit Python Worker\n"
-            f"- Network Dependency: 0% (Completely Offline / Independent)"
-        )
+        return f"📊 **System Status:** Time: `{now}` | Core Version: `{self.version}` | Mode: Active Chat Assistant"
 
-engine = RealExecutionEngine()
+assistant = RealChatAssistantEngine()
 
 # ----------------------------------------------------
-# UI STYLING
+# UI STYLING (Purple Cyberpunk Theme)
 # ----------------------------------------------------
 st.markdown("""
     <style>
@@ -134,55 +128,45 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Sidebar
+# Sidebar Controls
 with st.sidebar:
-    st.title("🛡️ MHZALY ENGINE")
+    st.title("💬 CHAT ASSISTANT")
     st.markdown("---")
-    target_lang = st.selectbox("Code Language Output", engine.supported_langs)
+    target_lang = st.selectbox("Code Language Output", assistant.supported_langs)
     st.markdown("---")
-    if st.button("Clear History", use_container_width=True):
-        st.session_state.messages = []
+    if st.button("Clear Chat History", use_container_width=True):
+        st.session_state.chat_history = []
         st.rerun()
-    st.markdown(f"<p style='text-align: center; color: #7f52a0;'>Engine: {engine.version}</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='text-align: center; color: #7f52a0;'>Assistant v{assistant.version}</p>", unsafe_allow_html=True)
 
-# Main UI
-st.title("🛡️ MHZALY True Execution Core")
-st.markdown("Real logic, regex log parsing, and functional code compilation without fake placeholders.")
+# Main Header
+st.title("💬 MHZALY Autonomous Chat Assistant")
+st.markdown("Real-time conversational assistant with full chat memory, code writing, and log parsing.")
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+# Initialize Chat History in Session State
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
 
-for msg in st.session_state.messages:
-    with st.chat_message(msg["role"]):
-        st.markdown(msg["content"])
-        if msg.get("img"):
-            st.image(msg["img"], width=300)
+# Display Prior Messages from History
+for message in st.session_state.chat_history:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+        if message.get("image"):
+            st.image(message["image"], width=300)
 
-col1, col2 = st.columns([5, 1])
-with col1:
-    user_query = st.text_input("Apna task ya log data yahan enter karein...", placeholder="e.g., Python mein Port Scanner likho ya logs analyze karo...")
-with col2:
-    uploaded_file = st.file_uploader("Upload", type=["png", "jpg", "jpeg", "txt"], label_visibility="collapsed")
+# Native Streamlit Chat Input (Modern Chat AI style)
+if user_prompt := st.chat_input("Apna sawal ya task yahan type karein..."):
+    # Append User Message to History
+    st.session_state.chat_history.append({"role": "user", "content": user_prompt})
+    
+    with st.chat_message("user"):
+        st.markdown(user_prompt)
 
-if st.button("Execute Core Process 🚀", use_container_width=True) or user_query:
-    if user_query or uploaded_file:
-        query_text = user_query if user_query else "Analyze uploaded file"
-        
-        st.session_state.messages.append({"role": "user", "content": query_text, "img": uploaded_file})
-        
-        with st.chat_message("user"):
-            st.markdown(query_text)
-            if uploaded_file:
-                st.image(uploaded_file, width=300)
-
-        with st.chat_message("assistant"):
-            with st.spinner("Running real execution logic..."):
-                if uploaded_file and hasattr(uploaded_file, "type") and "image" in uploaded_file.type:
-                    img = Image.open(uploaded_file)
-                    result = f"📸 **Image Processed:**\n- Resolution: {img.size}\n- Format: {img.format}\n- Status: Successfully loaded into memory buffer."
-                else:
-                    result = engine.process_request(query_text, target_lang)
-                
-                st.markdown(result)
-                
-        st.session_state.messages.append({"role": "assistant", "content": result})
+    # Generate Assistant Response
+    with st.chat_message("assistant"):
+        with st.spinner("Assistant is thinking..."):
+            response_text = assistant.generate_response(user_prompt, target_lang)
+            st.markdown(response_text)
+            
+    # Append Assistant Response to History
+    st.session_state.chat_history.append({"role": "assistant", "content": response_text})

@@ -13,38 +13,32 @@ st.set_page_config(
 # ----------------------------------------------------
 class PurePythonAssistant:
     def __init__(self):
-        self.version = "15.0-OFFLINE"
+        self.version = "15.1-OFFLINE"
         self.supported_langs = ["Python", "JavaScript", "C++", "Rust", "Go", "Bash", "Java", "SQL"]
 
     def evaluate_query(self, query: str, target_lang: str, chat_history: list) -> str:
         q = query.lower().strip()
         
-        # 1. Conversational / Contextual Logic
         if any(w in q for w in ['hi', 'hello', 'salam', 'hey', 'assalam']):
             return "Walaikum Assalam! Main aapka 100% offline, independent Python assistant hoon. Bataiye, aaj konsa task ya code likhwana hai?"
         
         elif any(w in q for w in ['kaise ho', 'how are you']):
-            return "Main bilkul theek hoon! Systems fully operational hain aur bina kisi API ke local logic par run ho rahe hain."
+            return "Main bilkul theek hoon! Systems fully operational hain aur bina kisi API ke local logic par run ho rahe ہیں۔"
 
-        # 2. Dynamic Multi-Language Code Generation Logic
         elif any(w in q for w in ['code', 'script', 'program', 'likho', 'banao', 'generate', 'function']):
             return self._generate_dynamic_code(query, target_lang)
 
-        # 3. Security / Regex Log Analysis
         elif any(w in q for w in ['log', 'scan', 'ip', 'threat', 'security', 'analyze', 'parse']):
             return self._perform_regex_triage(query)
 
-        # 4. System & Math Utilities
         elif any(w in q for w in ['time', 'date', 'status', 'waqt']):
             now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             return f"⚡ **System Status:** Timestamp: `{now}` | Mode: 100% Offline Python Logic."
 
-        # 5. General Conversational Fallback (Dynamic Mirroring & Smart Structuring)
         else:
             return self._generate_conversational_fallback(query, target_lang)
 
     def _generate_dynamic_code(self, task: str, lang: str) -> str:
-        # Dynamic code templates tailored to the requested language and user task
         templates = {
             "Python": (
                 f"# Autonomous Python Script\n"
@@ -52,11 +46,10 @@ class PurePythonAssistant:
                 "import sys\nimport os\nimport datetime\n\n"
                 "def main_process():\n"
                 f"    print(f'[*] Initializing execution for: {task}')\n"
-                "    # Core logic execution\n"
                 "    try:\n"
                 "        print('[+] Task completed successfully.')\n"
                 "    except Exception as e:\n"
-                "        print(f'[-] Error: {e}')\n\n"
+                "        print(f'[-] Error: {{e}}')\n\n"
                 "if __name__ == '__main__':\n"
                 "    main_process()"
             ),
@@ -66,7 +59,6 @@ class PurePythonAssistant:
                 "const fs = require('fs');\n\n"
                 "function executeTask() {\n"
                 f"    console.log('[*] Running Node execution for: {task}');\n"
-                "    // Module logic here\n"
                 "}\n\n"
                 "executeTask();"
             ),
@@ -84,9 +76,9 @@ class PurePythonAssistant:
             "Rust": (
                 f"// Autonomous Rust Program\n"
                 f"// Objective: {task}\n"
-                "fn main() {\n"
-                f"    println!(\"[*] Running Rust routine for: {}\", \"{task}\");\n"
-                "}"
+                "fn main() {{\n"
+                f"    println!(\"[*] Running Rust routine for: {{}}\", \"{task}\");\n"
+                "}}"
             ),
             "Go": (
                 f"// Autonomous Go Routine\n"
@@ -147,7 +139,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Sidebar
 with st.sidebar:
     st.title("⚡ OFFLINE ASSISTANT")
     st.markdown("---")
@@ -158,20 +149,16 @@ with st.sidebar:
         st.rerun()
     st.markdown(f"<p style='text-align: center; color: #7f52a0;'>Engine: v{assistant.version}</p>", unsafe_allow_html=True)
 
-# Main Screen
 st.title("⚡ MHZALY Independent Chat Assistant")
 st.markdown("100% Offline, Pure Python Logic, Zero APIs, Zero Heavy Dependencies.")
 
-# Initialize Session Chat History
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display Messages
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Chat Input Box
 if user_input := st.chat_input("Apna sawal ya task yahan type karein..."):
     st.session_state.messages.append({"role": "user", "content": user_input})
     

@@ -3,16 +3,12 @@ from PIL import Image
 import datetime
 import re
 
-# Page Layout Setup
 st.set_page_config(
     page_title="MHZALY Heavy-Duty Omni Core",
     page_icon="⚡",
     layout="wide"
 )
 
-# ----------------------------------------------------
-# REAL CORE ENGINE LOGIC (Integrated)
-# ----------------------------------------------------
 class MHZALYCoreEngine:
     def __init__(self):
         self.version = "5.0.0-PROD"
@@ -32,13 +28,47 @@ class MHZALYCoreEngine:
 
     def _generate_real_code(self, task: str, lang: str) -> str:
         if lang == "Python":
-            code = f"# Auto-Generated Python Production Script\n# Task: {task}\nimport os, sys, socket\n\ndef execute_payload():\n    print('[*] Initializing secure execution...')\n    target_task = \"{task}\"\n    return True\n\nif __name__ == '__main__':\n    execute_payload()"
+            code = (
+                f"# Auto-Generated Python Production Script\n"
+                f"# Task: {task}\n"
+                "import os, sys, socket\n\n"
+                "def execute_payload():\n"
+                "    print('[*] Initializing secure execution...')\n"
+                f"    target_task = \"{task}\"\n"
+                "    return True\n\n"
+                "if __name__ == '__main__':\n"
+                "    execute_payload()"
+            )
         elif lang == "JavaScript":
-            code = f"// Auto-Generated JavaScript Node Module\n// Task: {task}\nconst fs = require('fs');\n\nfunction executeTask() {\n    console.log('[*] Running Node execution for: {task}');\n}\n\nexecuteTask();"
+            code = (
+                f"// Auto-Generated JavaScript Node Module\n"
+                f"// Task: {task}\n"
+                "const fs = require('fs');\n\n"
+                "function executeTask() {\n"
+                f"    console.log('[*] Running Node execution for: {task}');\n"
+                "}\n\n"
+                "executeTask();"
+            )
         elif lang == "C++":
-            code = f"// Auto-Generated C++ Core Binary\n// Task: {task}\n#include <iostream>\n#include <string>\n\nusing namespace std;\n\nint main() {\n    cout << \"[*] Executing C++ module for: {task}\" << endl;\n    return 0;\n}"
+            code = (
+                f"// Auto-Generated C++ Core Binary\n"
+                f"// Task: {task}\n"
+                "#include <iostream>\n"
+                "#include <string>\n\n"
+                "using namespace std;\n\n"
+                "int main() {\n"
+                f"    cout << \"[*] Executing C++ module for: {task}\" << endl;\n"
+                "    return 0;\n"
+                "}"
+            )
         elif lang == "Bash":
-            code = f"#!/bin/bash\n# Auto-Generated Bash Automation Script\n# Task: {task}\necho '[*] Starting shell execution...'\necho 'Target: {task}'"
+            code = (
+                "#!/bin/bash\n"
+                f"# Auto-Generated Bash Automation Script\n"
+                f"# Task: {task}\n"
+                "echo '[*] Starting shell execution...'\n"
+                f"echo 'Target: {task}'"
+            )
         else:
             code = f"# Generic template for {lang}\n# Task: {task}"
             
@@ -53,10 +83,8 @@ class MHZALYCoreEngine:
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         return f"⚡ **System Diagnostics:**\n- Timestamp: `{now}`\n- Core Status: Active\n- Dependency Level: Zero external APIs (Pure Python)"
 
-# Initialize Engine
 engine = MHZALYCoreEngine()
 
-# Custom Purple Cyberpunk Styling
 st.markdown("""
     <style>
     .stApp { background-color: #0b0210; color: #e2d9f3; font-family: 'Inter', sans-serif; }
@@ -73,7 +101,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Sidebar Configuration
 with st.sidebar:
     st.title("⚡ MHZALY CORE ENGINE")
     st.markdown("---")
@@ -84,21 +111,18 @@ with st.sidebar:
         st.rerun()
     st.markdown(f"<p style='text-align: center; color: #7f52a0;'>Engine Version: {engine.version}</p>", unsafe_allow_html=True)
 
-# Main UI Interface
 st.title("⚡ MHZALY Autonomous Heavy-Duty Engine")
-st.markdown("Real programmatic logic engine—clean syntax structure ready for production.")
+st.markdown("Real programmatic logic engine—clean string definitions to prevent any syntax padding errors.")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Render Chat History
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
         if message.get("image"):
             st.image(message["image"], width=300)
 
-# Input Box & File Uploader
 col1, col2 = st.columns([5, 1])
 with col1:
     user_input = st.text_input("Apna task ya query yahan enter karein...", placeholder="e.g., Python mein Port Scanner script likho...")
